@@ -1,0 +1,32 @@
+{
+  "name": "api_task",
+  "version": "1.0.0",
+  "description": "task management API demo",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon -w ./app.js",
+    "test": "jest --colors --detectOpenHandles --verbose ./tests"
+  },
+  "engines": {
+    "node": ">=18.19.0",
+    "npm": ">=10.2.3"
+  },
+  "author": "Roderick Rocamora",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "bluebird": "^3.7.2",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "knex": "^3.1.0",
+    "lodash": "^4.17.21",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.3"
+  }
+}

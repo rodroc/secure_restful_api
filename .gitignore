@@ -1,0 +1,16 @@
+_exclude/*
+node_modules/*
+api_task/node_modules/*
+package-lock.json
+package.json.*
+*.env
+*.js.*
+docker-compose.*.*
+Dockerfile_*.*
+config/*.env
+README.md.*
+dockerfile.*
+jest.*
+tsconfig.json
+tsconfig.json.*
+project.txt
