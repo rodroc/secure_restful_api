@@ -4,7 +4,8 @@ const express = require("express"),
     Promise = require("bluebird"),
     _ = require("lodash"),
     jwt = require('jsonwebtoken'),
-    bcrypt = require('bcryptjs')
+    bcrypt = require('bcryptjs'),
+    validator = require('validator')
 
 const knex = require("./DB"),
     User = require('./models/user')
@@ -44,14 +45,15 @@ const getFullList = async () => {
 
 app.post('/register',async(req,res)=>{
     try{
-
-        // const tasks = await conn('tasks')
-        // console.log({tasks})
-        // const users = await conn('users')
-        // console.log({users})
+        // const tasks = await conn('tasks') // console.log({tasks})
+        // const users = await conn('users') // console.log({users})
         const { email,password } = req.body
         console.log('saving...',req.body)
         // TODO: add validation
+        if( !validator.isEmail(email) ) return res.status(400).send({error:"Not a valid email"})
+        if( !password ) return res.status(400).send({error:"Password is required"})
+        if( !(password.length>7 && password.length<17) ) return res.status(400).send({error:"Password length should be between 8 to 16 characters."})
+        // TODO: you can add more requirements
         const user = new User(email,password)
         await conn("users").insert(user)
         res.status(200).json({})
