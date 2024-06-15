@@ -34,6 +34,7 @@ class DBInstance{
             },
             // ssl: config['DB_SSL'] ? { rejectUnauthorized: false } : false,
             debug: true,
+            useNullAsDefault: true,
             asyncStackTraces: true,
             pool: {min:0,max:10}
         })

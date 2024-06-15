@@ -10,10 +10,10 @@ const auth = async(req,res,next)=>{
     try{
         const token = req.header('Authorization').replace('Bearer ','')
         const decoded = jwt.verify(token,constants.security.jwtSignatureText)
-        const user = await conn('users_tokens').where({id_user:decoded._id,token}).first()
-        // console.log({token,decoded,user})
-        if( !user ) throw new Error()
-        req.userId = user.id
+        const foundToken = await conn('users_tokens').where({id_user:decoded._id,token}).first()
+        // console.log({token,decoded,foundToken})
+        if( !foundToken ) throw new Error()
+        req.userId = foundToken.id_user
         next()
     }catch(error){
         console.error(error)
