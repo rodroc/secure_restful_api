@@ -4,7 +4,7 @@
   "description": "task management API demo",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon -w ./app.js",
+    "dev": "nodemon -w .",
     "test": "jest --colors --detectOpenHandles --verbose ./tests"
   },
   "engines": {
