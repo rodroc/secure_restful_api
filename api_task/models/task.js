@@ -19,10 +19,10 @@ class Task{
     async get(andWhere={}){
         const item = await this.#db(Task.#tableName).where({id_user:this.id_user}).andWhere(andWhere).first()
         this.id = item? item.id: 0
+        return item
     }
 
     async select(andWhere={}){
-        console.log('select',Task.#tableName,this.id_user,andWhere)
         return await this.#db(Task.#tableName).where({id_user:this.id_user}).andWhere(andWhere)
     }
 
@@ -41,13 +41,6 @@ class Task{
     }
 
     async update(){
-        // console.log({
-        //     id:this.id,
-        //     title:this.title,
-        //     description: this.description,
-        //     due_date:this.due_date,
-        //     completed:this.completed
-        // })
         if( !this.id ) throw new Error(`Identifier is required.`)
         return await this.#db(Task.#tableName).where({id:this.id}).update({
             title:this.title,
@@ -58,13 +51,6 @@ class Task{
     }
 
     async delete(id){
-        // console.log({
-        //     id:this.id,
-        //     title:this.title,
-        //     description: this.description,
-        //     due_date:this.due_date,
-        //     completed:this.completed
-        // })
         return await this.#db(Task.#tableName).where({id,id_user:this.id_user}).delete()
     }
 }

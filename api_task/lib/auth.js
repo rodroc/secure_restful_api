@@ -6,12 +6,10 @@ const constants = require('../lib/constants'),
 conn = knex.instance
 
 const auth = async(req,res,next)=>{
-    console.error('auth middleware')
     try{
         const token = req.header('Authorization').replace('Bearer ','')
         const decoded = jwt.verify(token,constants.security.jwtSignatureText)
         const foundToken = await conn('users_tokens').where({id_user:decoded._id,token}).first()
-        // console.log({token,decoded,foundToken})
         if( !foundToken ) throw new Error()
         req.userId = foundToken.id_user
         next()

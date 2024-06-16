@@ -1,17 +1,28 @@
 const Knex = require('knex')
 
-// const config = 
-// require('dotenv').config()
 const settings = require('../settings')
 settings.setEnv()
 
-// console.log(process.env)
-// console.log({config})
-// console.log(config['DB_HOST'])
-// console.log(config.parsed.DB_HOST)
-
 class DBInstance{
-    constructor(){}
+    constructor(){
+    }
+
+    set(env){
+        if( env ){
+            switch(env){
+                case 'dev':
+                    return this.initDev()
+                case 'test':
+                    return this.initTest()                    
+                case 'prod':
+                    return this.initProd()
+                case 'replica':
+                    return this.initReplica()
+                default:
+                    throw new Error(`Missing environment variable.`)
+            }
+        }else throw new Error(`Missing environment variable.`)
+    }
 
     init(){
         if( process.env.NODE_ENV ){
@@ -50,7 +61,7 @@ class DBInstance{
             connection: {
                 filename: '../db/test.db3',
             },
-            // debug: true,
+            debug: false,
             useNullAsDefault: true,
             asyncStackTraces: true,
             pool: {min:0,max:10}
@@ -70,6 +81,11 @@ const dbInstance = new DBInstance()
 const instance = dbInstance.init()
 
 module.exports = {
+    setEnv:env=>{
+        const db = new DBInstance()
+        const inst = db.set(env)
+        return inst
+    },
     instance,
     destroy: async() => {
         instance.destroy()

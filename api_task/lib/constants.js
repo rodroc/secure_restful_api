@@ -1,6 +1,9 @@
 module.exports = {
     security: {
         jwtSignatureText: 'sampleSignatureText',
-        jwtExpiresIn: '300 seconds'
+        jwtExpiresIn: '3600 seconds'
+    },
+    testing:{
+        baseUrl: 'http://localhost:3002'
     }
 }

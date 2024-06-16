@@ -1,14 +1,11 @@
 const express = require('express'),
     validator = require('validator'),
     _ = require("lodash"),
-    jwt = require('jsonwebtoken'),
     bcrypt = require('bcryptjs')
 
-const constants = require('../lib/constants'),
-    { generateAuthToken }  = require('../lib/auth'),
+const { generateAuthToken }  = require('../lib/auth'),
     knex = require('../lib/DB'),
-    User  = require('../models/user'),
-    Task = require('../models/task')
+    User  = require('../models/user')
     
 const router = express.Router()
 const conn = knex.instance    
