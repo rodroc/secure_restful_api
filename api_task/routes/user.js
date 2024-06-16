@@ -35,7 +35,7 @@ router.post('/register',async(req,res)=>{
         const userId = await newUser.save()
         const token = await generateAuthToken(userId)
         newUser.saveToken(token)
-        res.status(200).json({done:true})
+        return res.status(200).json({user:{id:userId,email},token})
     }catch(error){
         console.error(error)
         res.status(400).send({error:"Application error."})
@@ -64,7 +64,6 @@ router.post('/login',async(req,res)=>{
         const token = await generateAuthToken(user.id)
         const foundUser = new User(email,hashedPassword,user.id)
         await foundUser.saveToken(token)
-
         return res.status(200).json({user:{id:user.id,email},token})
     }catch(error){
         console.log({error})

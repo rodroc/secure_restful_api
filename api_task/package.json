@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon -w .",
-    "test": "jest --colors --detectOpenHandles --verbose ./tests"
+    "test": "concurrently \"node app.js --test\" \"jest --colors --detectOpenHandles --verbose ./tests\"",
+    "test2": "jest --colors --detectOpenHandles --verbose ./tests"
   },
   "engines": {
     "node": ">=18.19.0",
@@ -28,6 +29,9 @@
     "validator": "^13.12.0"
   },
   "devDependencies": {
+    "axios": "^1.7.2",
+    "concurrently": "^8.2.2",
+    "email-generator": "^1.0.1",
     "jest": "^29.7.0",
     "nodemon": "^3.0.3"
   }

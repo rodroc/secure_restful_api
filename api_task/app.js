@@ -1,12 +1,17 @@
 const express = require("express"),
     http = require("http"),
     cors = require("cors")
+// dotEnv = require('dotenv')
+
+const settings = require('./settings')
+
+settings.setEnv()
+// console.log(process.env)
+// return
 
 const userRouter = require('./routes/user'),
     taskRouter = require('./routes/task')
     
-require('dotenv').config()
-
 const app = express()
 app.use(express.json())
 app.use(cors())

@@ -1,7 +1,9 @@
 const Knex = require('knex')
 
 // const config = 
-require('dotenv').config()
+// require('dotenv').config()
+const settings = require('../settings')
+settings.setEnv()
 
 // console.log(process.env)
 // console.log({config})
@@ -16,12 +18,14 @@ class DBInstance{
             switch(process.env.NODE_ENV){
                 case 'dev':
                     return this.initDev()
+                case 'test':
+                    return this.initTest()                    
                 case 'prod':
                     return this.initProd()
                 case 'replica':
                     return this.initReplica()
                 default:
-                    // do nothing
+                    throw new Error(`Missing environment variable.`)
             }
         }
     }
@@ -39,6 +43,19 @@ class DBInstance{
             pool: {min:0,max:10}
         })
     }
+
+    initTest(){
+        return Knex({
+            client: 'sqlite3',
+            connection: {
+                filename: '../db/test.db3',
+            },
+            // debug: true,
+            useNullAsDefault: true,
+            asyncStackTraces: true,
+            pool: {min:0,max:10}
+        })
+    }    
 
     initProd(){
         // TODO: configs for prod db
