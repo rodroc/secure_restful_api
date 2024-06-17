@@ -3,46 +3,36 @@ const Knex = require('knex')
 const settings = require('../settings')
 settings.setEnv()
 
-console.error('DBInstance JEST check',process.env.AUTOMATED_TEST)
+// console.error('DBInstance JEST check',process.env.AUTOMATED_TEST)
 
 class DBInstance{
-    constructor(){
-    }
+
+    constructor(){}
 
     set(env){
         if( env ){
             switch(env){
-                case 'dev':
-                    return this.initDev()
-                case 'test':
-                    return this.initTest()                    
-                case 'prod':
-                    return this.initProd()
-                case 'replica':
-                    return this.initReplica()
-                default:
-                    throw new Error(`Missing environment variable.`)
+                case 'dev': return this.initDev()
+                case 'test': return this.initTest()                    
+                case 'prod': return this.initProd()
+                case 'replica': return this.initReplica()
+                default: throw new Error(`Missing environment variable.`)
             }
         }else throw new Error(`Missing environment variable.`)
     }
 
     init(){
-        console.error('AUTOMATED_TEST',process.env.AUTOMATED_TEST)
+        // console.error('AUTOMATED_TEST',process.env.AUTOMATED_TEST)
         if( process.env.AUTOMATED_TEST ){
             return this.initTest()
         }else{
             if( process.env.NODE_ENV ){
                 switch(process.env.NODE_ENV){
-                    case 'dev':
-                        return this.initDev()
-                    case 'test':
-                        return this.initTest()                    
-                    case 'prod':
-                        return this.initProd()
-                    case 'replica':
-                        return this.initReplica()
-                    default:
-                        throw new Error(`Missing environment variable.`)
+                    case 'dev': return this.initDev()
+                    case 'test': return this.initTest()                    
+                    case 'prod': return this.initProd()
+                    case 'replica': return this.initReplica()
+                    default: throw new Error(`Missing environment variable.`)
                 }
             }
         }
@@ -97,10 +87,4 @@ module.exports = {
     destroy: async() => {
         instance.destroy()
     }
-    // instance:()=>{
-    //     const db = new DBInstance()
-    //     // const env = `${process.env.AUTOMATED_TEST}`
-    //     const inst = db.init()
-    //     return inst
-    // }
 }

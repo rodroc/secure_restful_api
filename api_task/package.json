@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon -w .",
+    "all-test": "concurrently \"node app.js --test\" \"jest --colors --detectOpenHandles --verbose ./test-integration\" \"jest --colors --detectOpenHandles --verbose ./test-unit\"",
     "integration-test": "concurrently \"node app.js --test\" \"jest --colors --detectOpenHandles --verbose ./test-integration\"",
     "unit-test": "jest --colors --detectOpenHandles --verbose ./test-unit",
     "test": "jest --colors --detectOpenHandles --verbose ./tests"
