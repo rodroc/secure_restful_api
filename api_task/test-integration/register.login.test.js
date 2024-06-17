@@ -3,7 +3,7 @@ const axios = require('axios'),
 
 const dbRoutine = require('./dbroutine')
 
-test(`Register and login user.`, async () => {
+test(`Integration Test: Register and login user.`, async () => {
 
     await dbRoutine.truncate()
 

@@ -1,8 +1,12 @@
 const emailgenerator = require('email-generator')
 
+const dbRoutine = require('../test-integration/dbroutine')
 const conn = require('../lib/DB').instance
 
-test(`User Model`,async()=>{
+test(`Unit Test: User Model`,async()=>{
+
+    await dbRoutine.truncate()
+
     const userModel = require('../models/user')
     let email = emailgenerator.generateEmail().replaceAll('"','') //10,'gmail')
     const user = new userModel(email,'12345678')

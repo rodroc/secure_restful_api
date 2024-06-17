@@ -1,1 +1,27 @@
 FROM node:18.20.3-alpine3.20
+RUN apk update
+RUN apk add --no-cache nodejs npm openssh-client openssh-client-common ca-certificates openssl lftp
+USER root
+RUN addgroup docker
+RUN adduser -S -G root docker
+RUN mkdir -p /app
+RUN chown -R docker /app
+RUN chown -R 775 /app
+RUN mkdir -p /db  
+RUN chown -R docker /db
+RUN chown -R 775 /db
+COPY db/* /db
+WORKDIR /app
+COPY api_task/*.js /app
+COPY api_task/lib /app/lib
+COPY api_task/models /app/models
+COPY api_task/routes /app/routes
+COPY api_task/.env.dev /app/.env.dev
+COPY api_task/.env.test /app/.env.test
+COPY api_task/package.json /app/package.json
+CMD [ "npm", "install"]
+#COPY api_task/start.sh /app/start.sh
+WORKDIR /app
+EXPOSE 3001
+EXPOSE 3002
+CMD [ "npm", "run", "dev"]

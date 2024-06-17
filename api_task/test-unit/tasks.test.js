@@ -1,8 +1,12 @@
 const { sentence } = require('txtgen/dist/cjs/txtgen.js')
 
+const dbRoutine = require('../test-integration/dbroutine')
 const conn = require('../lib/DB').instance
 
-test(`Task Model`,async()=>{
+test(`Unit Test: Task Model`,async()=>{
+
+    await dbRoutine.truncate()
+
     const taskModel = require('../models/task')
     const id_user = 1 // mock id_user
     const task = new taskModel(id_user)

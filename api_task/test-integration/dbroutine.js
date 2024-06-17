@@ -4,6 +4,7 @@ const truncate = async() => {
     (async()=>{
         try{
             const conn = knex.setEnv('test')
+            
             await conn('users').del()
             await conn('users').truncate()
         
