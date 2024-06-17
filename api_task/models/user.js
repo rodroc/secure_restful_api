@@ -8,7 +8,6 @@ class User{
     
     constructor(email,password,id=null){
         this.#db = knex.instance
-
         this.email=email
         this.password=password
         this.id=id
@@ -19,6 +18,7 @@ class User{
     }
 
     async save(){
+        // User.#tableName
         const result = await this.#db(User.#tableName).insert({email:this.email,password:this.password})
         this.id = result[0]
         return result[0]

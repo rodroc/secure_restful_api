@@ -5,8 +5,9 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon -w .",
-    "test": "concurrently \"node app.js --test\" \"jest --colors --detectOpenHandles --verbose ./tests\"",
-    "test2": "jest --colors --detectOpenHandles --verbose ./tests"
+    "integration-test": "concurrently \"node app.js --test\" \"jest --colors --detectOpenHandles --verbose ./test-integration\"",
+    "unit-test": "jest --colors --detectOpenHandles --verbose ./test-unit",
+    "test": "jest --colors --detectOpenHandles --verbose ./tests"
   },
   "engines": {
     "node": ">=18.19.0",
